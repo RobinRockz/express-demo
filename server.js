@@ -2,6 +2,7 @@ const express = require('express');
 const Joi = require('joi');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const config = require('config');
 
 // custom middlewares
 const authenticate = require('./src/middlewares/authenticate');
@@ -17,6 +18,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(authenticate);
 app.use(helmet());
+
+// configuration
+console.log(`App name: ${config.get('name')}`);
+// console.log(`DB password: ${config.get('database.password')}`);
 
 if (app.get('env') === 'development') {
     console.log('Morgan enabled');
