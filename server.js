@@ -16,6 +16,10 @@ const authenticate = require('./src/middlewares/authenticate');
 
 const app = express();
 
+// template
+app.set('view engine', 'pug');
+// app.set('views', './views'); // default
+
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -42,7 +46,10 @@ const products = [
 ]
 
 app.get('/', (req, res) => {
-    res.send('Api running..');
+    res.render('index', {
+        title: 'Express api',
+        message: 'Api running..'
+    });
 })
 
 app.get('/api/products', (req, res) => {
