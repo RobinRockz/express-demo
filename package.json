@@ -1,0 +1,20 @@
+{
+  "name": "express-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "Robin Baskaran",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "joi": "^17.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.9"
+  }
+}
