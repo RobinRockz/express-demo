@@ -10,16 +10,18 @@ const authenticate = require('./src/middlewares/authenticate');
 const dotenv = require('dotenv');
 dotenv.config();
 
-
 const app = express();
 
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(morgan('tiny'));
 app.use(authenticate);
 app.use(helmet());
 
+if (app.get('env') === 'development') {
+    console.log('Morgan enabled');
+    app.use(morgan('tiny'));
+}
 
 const products = [
     { id: 1, name: 'hamam' },
