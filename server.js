@@ -1,15 +1,18 @@
+// process env config
+const dotenv = require('dotenv');
+dotenv.config();
+
 const express = require('express');
 const Joi = require('joi');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const config = require('config');
+const debug = require('debug')('app:startup');
+// const dbDebugger = require('debug')('app:db');
 
 // custom middlewares
 const authenticate = require('./src/middlewares/authenticate');
 
-// process env config
-const dotenv = require('dotenv');
-dotenv.config();
 
 const app = express();
 
@@ -20,13 +23,16 @@ app.use(authenticate);
 app.use(helmet());
 
 // configuration
-console.log(`App name: ${config.get('name')}`);
-// console.log(`DB password: ${config.get('database.password')}`);
+debug(`App name: ${config.get('name')}`);
+// startupDebugger(`DB password: ${config.get('database.password')}`);
 
 if (app.get('env') === 'development') {
-    console.log('Morgan enabled');
+    debug('Morgan enabled');
     app.use(morgan('tiny'));
 }
+
+// DB work...
+// dbDebugger('database is connected...');
 
 const products = [
     { id: 1, name: 'hamam' },
