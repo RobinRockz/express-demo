@@ -35,7 +35,7 @@ app.get('/api/products/:id', (req, res) => {
 })
 
 app.post('/api/products', (req, res) => {
-    const { error } = validateCourse(req.body);
+    const { error } = validateProduct(req.body);
     if (error) return res.status(400).send(error);
 
     const product = {
@@ -53,7 +53,7 @@ app.put('/api/products/:id', (req, res) => {
     const product = products.find(product => product.id === Number(req.params.id));
     if (!product) return res.status(404).send('data not found')
 
-    const { error } = validateCourse(req.body);
+    const { error } = validateProduct(req.body);
     if (error) return res.status(400).send(error);
 
     product.name = req.body.name;
@@ -84,10 +84,10 @@ app.listen(port, () => {
 
 
 
-function validateCourse(course) {
+function validateProduct(product) {
     const schema = Joi.object({
         name: Joi.string().min(3).required()
     });
 
-    return schema.validate(course);
+    return schema.validate(product);
 }
