@@ -1,6 +1,10 @@
 const express = require('express');
 const Joi = require('joi');
 
+// custom middlewares
+const logger = require('./src/middlewares/logger');
+const authenticate = require('./src/middlewares/authenticate');
+
 // process env config
 const dotenv = require('dotenv');
 dotenv.config();
@@ -10,6 +14,8 @@ const app = express();
 
 // middleware
 app.use(express.json());
+app.use(logger);
+app.use(authenticate);
 
 
 const products = [
